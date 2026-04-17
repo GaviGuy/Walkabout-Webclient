@@ -1,2 +1,2 @@
 # Walkabout-Webclient
-Used to connect to an Archipelago multiworld as a Walkabout Minigolf player
+Used to connect to an Archipelago multiworld as a Walkabout Mini Golf player
