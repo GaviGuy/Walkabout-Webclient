@@ -5,12 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Connect to a Walkabout Minigolf slot for an Archipelago multiworld">
     <title>Walkabout AP Client</title>
-    
+
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="styles/courseSelect.css">
     <script type="module" src="main.js"></script>
+    <script type="application/javascript" src="scripts/parseCourseInfo.js"></script>
 </head>
 <body>
-    wawa!
-    <button onclick="login('localhost:38281', 'gav')">login</button>
+    <div id="connection-info">
+        <span id="top-text">Not currently connected</span>
+        <button id="top-disconnect">Disconnect</button>
+    </div>
+    <div id="connect-controls">
+        <label for="input-address">Address and Port: </label>
+        <input type="text" id="input-address"></input>
+        <label for="input-username">Username: </label>
+        <input type="text" id="input-username"></input>
+        <label for="input-password">Password: </label>
+        <input type="text" id="input-password"></input>
+        <button id="login-button">login</button>
+        <br>
+        <input id="chat-input"></input>
+    </div>
+    <div id="course-select" class="content active">COURSE SELECT
+        <div id="course-select-list"></div>
+    </div>
+    <div id="scorecard" class="content">SCORECARD</div>
 </body>

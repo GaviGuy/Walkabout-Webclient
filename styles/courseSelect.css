@@ -1,0 +1,14 @@
+#course-select-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.course-tile {
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px solid var(--color-main);
+    border-radius: 1rem;
+    width: 12rem;
+    background-color: color-mix(in srgb, var(--color-1) 50%, var(--color-bg));
+}

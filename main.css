@@ -1,4 +1,57 @@
+:root {
+    --color-main: #220;
+    --color-bg: #FEF;
+    --color-1: #80B;
+    --color-2: #48D;
+}
+
 body {
-    color: #222200;
-    background-color: #FEF;
+    color: var(--color-main);
+    background-color: var(--color-bg);
+    padding: 0px;
+    margin: 0px;
+}
+
+.content {
+    display: none;
+    margin: 2rem;
+    padding: 1rem;
+    border: 4px solid var(--color-main);
+    border-radius: 1rem;
+}
+
+.content.active {
+    display: block;
+}
+
+#connection-info {
+    margin: 0px;
+    padding-top: 0px;
+    text-align: center;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+#connection-info {
+    background-color: #DDD;
+}
+
+#connection-info.connected {
+    background-color: #22EE22;
+}
+
+#connection-info>#top-disconnect {
+    display: none;
+}
+
+#connection-info.connected>#top-disconnect {
+    display: initial;
+}
+
+#connection-info.connecting {
+    background-color: #DDCC00;
+}
+
+#connection-info.disconnected-1 {
+    background-color: #B44;
 }
