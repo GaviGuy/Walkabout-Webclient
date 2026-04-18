@@ -1,4 +1,4 @@
-import { Client } from "./node_modules/archipelago.js";
+import { Client } from "node_modules/archipelago.js";
 
 const client = new Client();
 
