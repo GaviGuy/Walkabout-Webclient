@@ -1,0 +1,12 @@
+#connect-controls {
+    padding: 2rem;
+}
+
+#connect-controls>div {
+    padding-bottom: 0.25rem;
+}
+
+#connect-controls>div>label {
+    display: inline-block;
+    width: 8rem;
+}

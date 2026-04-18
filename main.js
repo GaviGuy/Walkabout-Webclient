@@ -1,24 +1,43 @@
 import { Client } from "https://unpkg.com/archipelago.js/dist/archipelago.min.js";
 
 const client = new Client();
+let slotData;
 
+function initialize() {
+    console.log("gmorning");
+    document.getElementById("controls-connect").addEventListener("click", () => {handleLoginButton()});
+    document.getElementById("chat-input").addEventListener("keyup", (e) => {
+        if(e.key === "Enter" || e.keyCode === 13) {
+            let elem = document.getElementById("chat-input");
+            client.messages.say(elem.value);
+            elem.value = "";
+        }
+    });
+    document.getElementById("input-address").addEventListener("keyup", (e) => {
+        updateConnectButton();
+    });
+    document.getElementById("input-username").addEventListener("keyup", (e) => {
+        updateConnectButton();
+    });
+    document.getElementById("top-disconnect").addEventListener("click", () => {disconnect()});
+    document.getElementById("controls-disconnect").addEventListener("click", () => {disconnect()});
 
-console.log("gmorning");
-document.getElementById("login-button").addEventListener("click", () => {handleLoginButton()});
-document.getElementById("chat-input").addEventListener("keyup", (e) => {
-    if(e.key === "Enter" || e.keyCode === 13) {
-        let elem = document.getElementById("chat-input");
-        client.messages.say(elem.value);
-        elem.value = "";
-    }
-});
-document.getElementById("top-disconnect").addEventListener("click", () => {disconnect()});
+    parseCourseInfo();
+    updateConnectButton();
+}
 
-parseCourseInfo();
+initialize();
 
 client.messages.on("message", (content) => {
     console.log(content);
 });
+
+function updateConnectButton() {
+    if(document.getElementById("input-address").value && document.getElementById("input-username").value)
+        document.getElementById("controls-connect").removeAttribute("disabled");
+    else
+        document.getElementById("controls-connect").setAttribute("disabled", 1);
+}
 
 function handleLoginButton() {
     let address = document.getElementById("input-address").value;
@@ -36,9 +55,14 @@ function updateTopBar(style, message) {
     document.getElementById("top-text").innerText = message;
 }
 
+function displayConnected() {
+    document.getElementById("controls-disconnect").removeAttribute("disabled");
+}
+
 function disconnect() {
     client.login().catch(()=>{});
     clearCourseSelect();
+    document.getElementById("controls-disconnect").setAttribute("disabled",1);
     updateTopBar(0, "Disconnected");
     //update other relevant places: chat input
 }
@@ -63,8 +87,10 @@ function login(address, username) {
     updateTopBar(1, "Connecting...")
     console.log("logging in...");
     client.login(address, username)
-        .then((slotData) => {
+        .then((val) => {
+            slotData = val;
             console.log(slotData);
+            displayConnected();
             updateTopBar(2, `Connected to ${address} as ${username}`);
             generateCourseSelect();
         })

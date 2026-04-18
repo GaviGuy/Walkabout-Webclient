@@ -34,5 +34,3 @@ async function parseCourseInfo() {
         console.error(e)   
     });
 }
-
-parseCourseInfo();

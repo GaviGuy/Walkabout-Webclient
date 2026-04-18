@@ -24,34 +24,6 @@ body {
     display: block;
 }
 
-#connection-info {
-    margin: 0px;
-    padding-top: 0px;
-    text-align: center;
-    width: 100%;
-    padding: 0.5rem;
-}
-
-#connection-info {
-    background-color: #DDD;
-}
-
-#connection-info.connected {
-    background-color: #22EE22;
-}
-
-#connection-info>#top-disconnect {
-    display: none;
-}
-
-#connection-info.connected>#top-disconnect {
-    display: initial;
-}
-
-#connection-info.connecting {
-    background-color: #DDCC00;
-}
-
-#connection-info.disconnected-1 {
-    background-color: #B44;
+#connect-controls {
+    padding: 2rem;
 }

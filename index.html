@@ -8,6 +8,8 @@
 
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="styles/topBar.css">
+    <link rel="stylesheet" type="text/css" href="styles/settings.css">
     <link rel="stylesheet" type="text/css" href="styles/courseSelect.css">
     <script type="module" src="main.js"></script>
     <script type="application/javascript" src="scripts/parseCourseInfo.js"></script>
@@ -18,14 +20,22 @@
         <button id="top-disconnect">Disconnect</button>
     </div>
     <div id="connect-controls">
-        <label for="input-address">Address and Port: </label>
-        <input type="text" id="input-address"></input>
-        <label for="input-username">Username: </label>
-        <input type="text" id="input-username"></input>
-        <label for="input-password">Password: </label>
-        <input type="text" id="input-password"></input>
-        <button id="login-button">login</button>
-        <br>
+        <div>
+            <label for="input-address">Address and Port: </label>
+            <input type="text" id="input-address" value="archipelago.gg:38281"></input>
+        </div>
+        <div>
+            <label for="input-username">Username: </label>
+            <input type="text" id="input-username"></input>
+        </div>
+        <div>
+            <label for="input-password">Password: </label>
+            <input type="text" id="input-password"></input>
+        </div>
+        <div>
+            <button id="controls-connect">Connect</button>
+            <button id="controls-disconnect" disabled>Disconnect</button>
+        </div>
         <input id="chat-input"></input>
     </div>
     <div id="course-select" class="content active">COURSE SELECT
