@@ -26,22 +26,30 @@
     </div>
     <div id="top-menu" state="0">
         <div>
-            <label for="input-address">Address and Port: </label>
-            <input type="text" id="input-address" placeholder="archipelago.gg:38281" value="archipelago.gg:38281"></input>
+            <div id="connection-panel">
+                <div>
+                    <label for="input-address">Address and Port: </label>
+                    <input type="text" id="input-address" placeholder="archipelago.gg:38281" value="archipelago.gg:38281"></input>
+                </div>
+                <div>
+                    <label for="input-username">Username: </label>
+                    <input type="text" id="input-username"></input>
+                </div>
+                <div>
+                    <label for="input-password">Password: </label>
+                    <input type="password" id="input-password"></input>
+                </div>
+                <div>
+                    <button id="controls-connect">Connect</button>
+                    <button id="controls-disconnect" disabled>Disconnect</button>
+                </div>
+            </div>
+            <div id="chat">
+                <div id="chat-log"></div>
+                <input id="chat-input"></input>
+                <button id="chat-send">Send Message</button>
+            </div>
         </div>
-        <div>
-            <label for="input-username">Username: </label>
-            <input type="text" id="input-username"></input>
-        </div>
-        <div>
-            <label for="input-password">Password: </label>
-            <input type="password" id="input-password"></input>
-        </div>
-        <div>
-            <button id="controls-connect">Connect</button>
-            <button id="controls-disconnect" disabled>Disconnect</button>
-        </div>
-        <input id="chat-input"></input>
         <button id="top-arrow">Connection Info</button>
     </div>
     <div id="content" tab="0">

@@ -10,9 +10,7 @@ function initialize() {
         () => handleLoginButton());
     document.getElementById("chat-input").addEventListener("keyup", (e) => {
         if(e.key === "Enter" || e.keyCode === 13) {
-            let elem = document.getElementById("chat-input");
-            client.messages.say(elem.value);
-            elem.value = "";
+            sendChatMessage();
         }
     });
     document.getElementById("top-arrow").addEventListener("click",
@@ -27,6 +25,8 @@ function initialize() {
         () => disconnect());
     document.getElementById("select-course-button").addEventListener("click",
         () => changeContentWindow(contentWindows.courseSelect));
+    document.getElementById("chat-send").addEventListener("click",
+        () => sendChatMessage());
 
     parseCourseInfo();
     initScorecardTabs();
@@ -35,8 +35,14 @@ function initialize() {
 
 initialize();
 
+function sendChatMessage() {
+    let chatBar = document.getElementById("chat-input");
+    client.messages.say(chatBar.value);
+    chatBar.value = "";
+}
+
 client.messages.on("message", (content) => {
-    console.log(content);
+    printChatMessage(content);
 });
 
 function updateConnectButton() {
@@ -62,6 +68,8 @@ function displayConnected() {
 }
 
 function disconnect() {
+    if(slotData) printChatMessage("Disconnected");
+    slotData = null;
     client.login().catch(()=>{});
     clearCourseSelect();
     document.getElementById("controls-disconnect").setAttribute("disabled", 1);

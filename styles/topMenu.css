@@ -27,20 +27,50 @@
     background-color: var(--color-bg);
 }
 
-#top-menu[state="1"]::after {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: block;
+#top-menu>div {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
 }
 
-#top-menu>div {
+#connection-panel {
+    height: 12rem;
+}
+
+#connection-panel>div {
     padding-bottom: 0.25rem;
 }
 
-#top-menu>div>label {
+#connection-panel>div>label {
     display: inline-block;
     width: 8rem;
+}
+
+#chat {
+    width: 100%;
+}
+
+#chat-log {
+    width: 100%;
+    max-width: calc(100vw - 20rem);
+    height: 12rem;
+    background: #DDD;
+    overflow-y: scroll;
+}
+
+#chat-log>* {
+    text-wrap: wrap;
+    overflow-wrap: break-word;
+    border-top: 1px solid var(--color-main);
+    overflow-x: clip;
+}
+
+#chat-input {
+    width: calc(100% - 10rem);
+}
+
+#chat-send {
+    width: 9rem;
 }
 
 #top-arrow {

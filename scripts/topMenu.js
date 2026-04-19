@@ -22,6 +22,17 @@ function handleTopArrow() {
     }
 }
 
+function printChatMessage(message) {
+    let elem = document.getElementById("chat-log");
+    let newElem = document.createElement("div");
+    newElem.textContent = message;
+    elem.appendChild(newElem);
+    console.log(message);
+
+    let chatLog = document.getElementById("chat-log");
+    chatLog.scrollTop += newElem.clientHeight + 1;
+}
+
 
 function initDebugHotkeys() {
     document.addEventListener("keydown", (e) => {
