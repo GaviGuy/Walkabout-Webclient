@@ -11,24 +11,26 @@ async function parseCourseInfo() {
             courseInfo[i].abbreviation = json[i][0];
 
             courseInfo[i].easyPars = [];
-            for(let j = 1; j < 21; j++)
-                courseInfo[i].easyPars.push(json[i][j]);
+            for(let j = 1; j < 19; j++)
+                if(json[i][j])
+                    courseInfo[i].easyPars.push(json[i][j]);
             
             courseInfo[i].hardPars = [];
-            for(let j = 21; j < 39; j++)
-                courseInfo[i].hardPars.push(json[i][j]);
+            for(let j = 19; j < 37; j++)
+                if(json[i][j])
+                    courseInfo[i].hardPars.push(json[i][j]);
 
-            courseInfo[i].easySlingshot = [];
-            if(json[i].easyslingshot)
-                courseInfo.easySlingshot = json[i][39];
+            courseInfo[i].easySlingshot = json[i][37];
+            // if(json[i][37])
+            //     courseInfo.easySlingshot = ;     //int
 
-            courseInfo[i].hardSlingshot = [];
-            if(json[i].hardslingshot)
-                courseInfo.hardSlingshot = json[i][40];
+            courseInfo[i].hardSlingshot = json[i][38];
+            // if(json[i][38])
+            //     courseInfo.hardSlingshot = ;     //int
 
-            courseInfo[i].foxhuntBranchCount = json[i][41];
-            courseInfo[i].mainHuntClues = json[i][42];
-            courseInfo[i].foxhuntBranchCount = json[i][43];
+            courseInfo[i].foxhuntBranchCount = json[i][39]; //int
+            courseInfo[i].mainHuntClues = json[i][40];      //int
+            courseInfo[i].foxhuntBranches = json[i][41];    //array
         }
     }).catch((e) => {
         console.error(e)   

@@ -1,0 +1,115 @@
+#scorecard-tabs {
+    display: flex;
+    flex-direction: row;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-bottom: 0px;
+}
+
+#scorecard-tabs>div {
+    border-top: 4px solid var(--color-main);
+    border-left: 4px solid var(--color-main);
+    border-right: 4px solid var(--color-main);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    flex-grow: 2;
+    text-align: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#scorecard-tabs>div:hover, #scorecard-tabs>div.active {
+    background-color: #FFF;
+}
+
+#scorecard {
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.scorecard-content {
+    display: none;
+}
+
+.scorecard-content.active {
+    display: contents;
+}
+
+#scorecard-top {
+    text-align: center;
+    padding: 2rem;
+}
+
+#scorecard-top-title {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.scorecard-grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+}
+
+.scorecard-grid>* {
+    text-align: center;
+    margin: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.hole {
+    font-size: 1.5em;
+    border: 2px solid var(--color-main);
+    border-radius: 50px;
+    background-color: #DDD;
+    width: 2.75rem;
+}
+
+.par {
+    font-size: 1.5em;
+    background-color: #DDD;
+    width: 2.75rem;
+
+}
+
+.score {
+    font-size: 1.25em;
+    background-color: #DDD;
+    width: 2.25rem;
+}
+
+.lostball {
+    font-size: 1.25em;
+    background-color: #DDD;
+    width: 2.25rem;
+}
+
+.target-input {
+    font-size: 1.25em;
+    background-color: #DDD;
+    width: 4rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.scorecard-targets {
+    padding: 2rem;
+}
+
+.scorecard-foxhunts {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.foxhunt {
+    text-align: center;
+    width: 28%;
+    border: 2px solid var(--color-main);
+    border-radius: 4px;
+    padding: 1rem;
+}

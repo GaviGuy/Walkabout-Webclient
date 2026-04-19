@@ -11,18 +11,21 @@
     <link rel="stylesheet" type="text/css" href="styles/topBar.css">
     <link rel="stylesheet" type="text/css" href="styles/settings.css">
     <link rel="stylesheet" type="text/css" href="styles/courseSelect.css">
+    <link rel="stylesheet" type="text/css" href="styles/scorecard.css">
     <script type="module" src="main.js"></script>
     <script type="application/javascript" src="scripts/parseCourseInfo.js"></script>
+    <script type="application/javascript" src="scripts/courseSelect.js"></script>
+    <script type="application/javascript" src="scripts/scorecard.js"></script>
 </head>
 <body>
     <div id="connection-info">
         <span id="top-text">Not currently connected</span>
         <button id="top-disconnect">Disconnect</button>
     </div>
-    <div id="connect-controls">
+    <div id="connect-controls" class="active">
         <div>
             <label for="input-address">Address and Port: </label>
-            <input type="text" id="input-address" value="archipelago.gg:38281"></input>
+            <input type="text" id="input-address" placeholder="archipelago.gg:38281" value="archipelago.gg:38281"></input>
         </div>
         <div>
             <label for="input-username">Username: </label>
@@ -30,7 +33,7 @@
         </div>
         <div>
             <label for="input-password">Password: </label>
-            <input type="text" id="input-password"></input>
+            <input type="password" id="input-password"></input>
         </div>
         <div>
             <button id="controls-connect">Connect</button>
@@ -38,8 +41,27 @@
         </div>
         <input id="chat-input"></input>
     </div>
-    <div id="course-select" class="content active">COURSE SELECT
+    <div id="course-select" class="main active content">
         <div id="course-select-list"></div>
     </div>
-    <div id="scorecard" class="content">SCORECARD</div>
+    <div id="scorecard" class="main active">
+        <div id="scorecard-top">
+            <span id="scorecard-top-title"></span>
+        </div>
+        <div id="scorecard-tabs">
+            <div id="tab-button-0" class="active">Normal</div>
+            <div id="tab-button-1">Hard</div>
+        </div>
+        <div id="scorecard" class="content">
+            <div id="scorecard-0" class="scorecard-content active">
+                <div class="scorecard-grid"></div>
+                <div class="scorecard-targets"></div>
+            </div>
+            <div id="scorecard-1" class="scorecard-content">
+                <div class="scorecard-grid"></div>
+                <div class="scorecard-targets"></div>
+                <div class="scorecard-foxhunts"></div>
+            </div>
+        </div>
+    </div>
 </body>

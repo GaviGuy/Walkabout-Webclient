@@ -23,6 +23,7 @@ function initialize() {
     document.getElementById("controls-disconnect").addEventListener("click", () => {disconnect()});
 
     parseCourseInfo();
+    initScorecardTabs();
     updateConnectButton();
 }
 
@@ -47,6 +48,7 @@ function handleLoginButton() {
     if(!address || !username) return;
 
     if(!password) login(address, username);
+    else login(address, username, password);
 }
 
 function updateTopBar(style, message) {
@@ -57,6 +59,7 @@ function updateTopBar(style, message) {
 
 function displayConnected() {
     document.getElementById("controls-disconnect").removeAttribute("disabled");
+    updateConnectionControls(1);
 }
 
 function disconnect() {
@@ -64,39 +67,40 @@ function disconnect() {
     clearCourseSelect();
     document.getElementById("controls-disconnect").setAttribute("disabled",1);
     updateTopBar(0, "Disconnected");
+    updateConnectionControls(0);
     //update other relevant places: chat input
 }
 
-function clearCourseSelect() {
-    document.getElementById("course-select-list").innerHTML = "";
-}
-
-function generateCourseSelect() {
-    clearCourseSelect();
-    let coursesElem = document.getElementById("course-select-list");
-    for(let i in courseInfo) {
-        let newElem = document.createElement("div");
-        newElem.classList.add("course-tile");
-        newElem.innerText = `${i} (${courseInfo[i].abbreviation})`;
-        coursesElem.appendChild(newElem);
-    }
-}
-
-function login(address, username) {
+function login(address, username, password) {
     disconnect();
     updateTopBar(1, "Connecting...")
     console.log("logging in...");
-    client.login(address, username)
+
+    const options = {};
+    if(password) options.password = password;
+
+    client.login(address, username, "", options)
         .then((val) => {
             slotData = val;
             console.log(slotData);
             displayConnected();
             updateTopBar(2, `Connected to ${address} as ${username}`);
             generateCourseSelect();
+            generateScorecard("Tourist Trap");
         })
         .catch((e) => {
             console.error(e);
-            updateTopBar(3, `Failed to connect`);
+            if(e.message.includes("InvalidSlot"))
+                updateTopBar(3, `Failed to connect: Invalid slot name`);
+            else if(e.message.includes("InvalidPassword"))
+                updateTopBar(3, `Failed to connect: Incorrect password`);
+            else
+                updateTopBar(3, `Failed to connect to server`);
         });
 }
 
+function updateConnectionControls(connected) {
+    let elem = document.getElementById("connect-controls");
+    if(connected) elem.classList.remove("active");
+    else elem.classList.add("active");
+}

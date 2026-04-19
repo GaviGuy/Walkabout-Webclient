@@ -1,5 +1,10 @@
 #connect-controls {
+    display: none;
     padding: 2rem;
+}
+
+#connect-controls.active {
+    display: block;
 }
 
 #connect-controls>div {
