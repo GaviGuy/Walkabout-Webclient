@@ -1,4 +1,9 @@
 let activeContent = -1;
+const contentWindows = {
+    blank: 0,
+    courseSelect: 1,
+    scorecard: 2
+};
 
 function clearCourseSelect() {
     document.getElementById("course-select-list").innerHTML = "";
@@ -14,19 +19,13 @@ function generateCourseSelect() {
 
         // lock course if it should be
         if(i[0] == "T") {
-            console.log(`locked ${i}`);
             newElem.classList.add("locked");
-            
-            let lockElem = document.createElement("img");
-            lockElem.width = 80;
-            lockElem.height = 80;
-            lockElem.src = "/assets/lock.svg";
-            lockElem.classList.add("lock-icon");
-            newElem.appendChild(lockElem);
         }
-        else newElem.tabIndex = 0;
+        else {
+            newElem.tabIndex = 0;
+        }
 
-        newElem.addEventListener("click", () => changeContentWindow(1));
+        newElem.addEventListener("click", () => changeContentWindow(contentWindows.scorecard));
         newElem.addEventListener("click", () => generateScorecard(i));
         coursesElem.appendChild(newElem);
 
@@ -34,20 +33,8 @@ function generateCourseSelect() {
 }
 
 function changeContentWindow(index) {
-    console.log(index);
     if(index == activeContent) return;
-    if(index == -1) {
-        document.getElementById("course-select").classList.remove("active");
-        document.getElementById("scorecard").classList.remove("active");
-    }
-    else if(index == 0) {
-        document.getElementById("course-select").classList.add("active");
-        document.getElementById("scorecard").classList.remove("active");
-    }
-    else {
-        document.getElementById("course-select").classList.remove("active");
-        document.getElementById("scorecard").classList.add("active");
-    }
+    switchTab(0);
+    document.getElementById("content").setAttribute("tab", index);
     activeContent = index;
-
 }

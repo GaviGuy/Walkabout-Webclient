@@ -7,12 +7,14 @@
     <title>Walkabout AP Client</title>
 
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/topBar.css">
-    <link rel="stylesheet" type="text/css" href="styles/settings.css">
+    <link rel="stylesheet" type="text/css" href="styles/topMenu.css">
     <link rel="stylesheet" type="text/css" href="styles/courseSelect.css">
     <link rel="stylesheet" type="text/css" href="styles/scorecard.css">
-    <script type="module" src="main.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+    <script type="application/javascript" src="scripts/topBar.js"></script>
+    <script type="application/javascript" src="scripts/topMenu.js"></script>
     <script type="application/javascript" src="scripts/parseCourseInfo.js"></script>
     <script type="application/javascript" src="scripts/courseSelect.js"></script>
     <script type="application/javascript" src="scripts/scorecard.js"></script>
@@ -22,7 +24,7 @@
         <span id="top-text">Not currently connected</span>
         <button id="top-disconnect">Disconnect</button>
     </div>
-    <div id="connect-controls" class="active">
+    <div id="top-menu" state="0">
         <div>
             <label for="input-address">Address and Port: </label>
             <input type="text" id="input-address" placeholder="archipelago.gg:38281" value="archipelago.gg:38281"></input>
@@ -40,28 +42,34 @@
             <button id="controls-disconnect" disabled>Disconnect</button>
         </div>
         <input id="chat-input"></input>
+        <button id="top-arrow">Connection Info</button>
     </div>
-    <div id="course-select" class="main content">Select a course
-        <div id="course-select-list"></div>
-    </div>
-    <div id="scorecard" class="main">
-        <div id="scorecard-top">
-            <span id="scorecard-top-title"></span>
-            <button id="select-course">O</button>
+    <div id="content" tab="0">
+        <div id="filler">
+            <img src="/assets/APGolfLogo256.png">
         </div>
-        <div id="scorecard-tabs">
-            <div id="tab-button-0" class="active">Normal</div>
-            <div id="tab-button-1">Hard</div>
+        <div id="course-select" class="content">Select a course
+            <div id="course-select-list"></div>
         </div>
-        <div id="scorecard-content" class="content">
-            <div id="scorecard-0" class="scorecard-content active">
-                <div class="scorecard-grid"></div>
-                <div class="scorecard-targets"></div>
+        <div id="scorecard">
+            <div id="scorecard-top">
+                <span id="scorecard-top-title"></span>
+                <button id="select-course-button">O</button>
             </div>
-            <div id="scorecard-1" class="scorecard-content">
-                <div class="scorecard-grid"></div>
-                <div class="scorecard-targets"></div>
-                <div class="scorecard-foxhunts"></div>
+            <div id="scorecard-tabs">
+                <div id="tab-button-0" class="active">Normal</div>
+                <div id="tab-button-1">Hard</div>
+            </div>
+            <div id="scorecard-content" class="content">
+                <div id="scorecard-0" class="scorecard-content active">
+                    <div class="scorecard-grid"></div>
+                    <div class="scorecard-targets"></div>
+                </div>
+                <div id="scorecard-1" class="scorecard-content">
+                    <div class="scorecard-grid"></div>
+                    <div class="scorecard-targets"></div>
+                    <div class="scorecard-foxhunts"></div>
+                </div>
             </div>
         </div>
     </div>

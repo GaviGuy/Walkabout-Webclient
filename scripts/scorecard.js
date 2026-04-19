@@ -1,10 +1,14 @@
 let scorecardTab = 0;
+const tabs = {
+    easy: 0,
+    hard: 1
+};
 
 function initScorecardTabs() {
     let tab0 = document.getElementById("tab-button-0");
     let tab1 = document.getElementById("tab-button-1");
-    tab0.addEventListener("click", () => switchTab(0));
-    tab1.addEventListener("click", () => switchTab(1));
+    tab0.addEventListener("click", () => switchTab(tabs.easy));
+    tab1.addEventListener("click", () => switchTab(tabs.hard));
 }
 
 function generateHoleNumbers(gridElem) {
@@ -49,7 +53,7 @@ function generateScoreInputs(gridElem, parlist) {
 
 function generateLostBalls(gridElem, parlist) {
     let labelElem = document.createElement("div");
-    labelElem.textContent = "Lost\nBall";
+    labelElem.innerHTML = "Lost<br>Ball";
     gridElem.appendChild(labelElem);
     for(let i = 0; i < 18; i++) {
         if(!parlist[i] && parlist[i] != 0) break;

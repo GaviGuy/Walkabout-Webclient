@@ -5,7 +5,9 @@ let slotData;
 
 function initialize() {
     console.log("gmorning");
-    document.getElementById("controls-connect").addEventListener("click", () => handleLoginButton());
+    initDebugHotkeys();
+    document.getElementById("controls-connect").addEventListener("click",
+        () => handleLoginButton());
     document.getElementById("chat-input").addEventListener("keyup", (e) => {
         if(e.key === "Enter" || e.keyCode === 13) {
             let elem = document.getElementById("chat-input");
@@ -13,15 +15,18 @@ function initialize() {
             elem.value = "";
         }
     });
-    document.getElementById("input-address").addEventListener("keyup", (e) => {
-        updateConnectButton();
-    });
-    document.getElementById("input-username").addEventListener("keyup", (e) => {
-        updateConnectButton();
-    });
-    document.getElementById("top-disconnect").addEventListener("click", () => disconnect());
-    document.getElementById("controls-disconnect").addEventListener("click", () => disconnect());
-    document.getElementById("select-course").addEventListener("click", () => changeContentWindow(0));
+    document.getElementById("top-arrow").addEventListener("click",
+        (e) => handleTopArrow());
+    document.getElementById("input-address").addEventListener("keyup",
+        (e) => updateConnectButton());
+    document.getElementById("input-username").addEventListener("keyup",
+        (e) => updateConnectButton());
+    document.getElementById("top-disconnect").addEventListener("click",
+        () => disconnect());
+    document.getElementById("controls-disconnect").addEventListener("click",
+        () => disconnect());
+    document.getElementById("select-course-button").addEventListener("click",
+        () => changeContentWindow(contentWindows.courseSelect));
 
     parseCourseInfo();
     initScorecardTabs();
@@ -51,59 +56,48 @@ function handleLoginButton() {
     login(address, username, password);
 }
 
-function updateTopBar(style, message) {
-    const classes = ["disconnected-0", "connecting", "connected", "disconnected-1"];
-    document.getElementById("connection-info").classList = [`${classes[style]}`];
-    document.getElementById("top-text").innerText = message;
-}
-
 function displayConnected() {
     document.getElementById("controls-disconnect").removeAttribute("disabled");
-    updateConnectionControls(1);
+    setTopMenuState(menuStates.collapsed);
 }
 
 function disconnect() {
     client.login().catch(()=>{});
     clearCourseSelect();
-    document.getElementById("controls-disconnect").setAttribute("disabled",1);
-    updateTopBar(0, "Disconnected");
-    updateConnectionControls(0);
-    changeContentWindow(-1);
+    document.getElementById("controls-disconnect").setAttribute("disabled", 1);
+    updateTopBar(topBarStates.none, "Disconnected");
+    setTopMenuState(menuStates.fixed);
+    changeContentWindow(contentWindows.blank);
     //update other relevant places: chat input
 }
 
 function login(address, username, password) {
     disconnect();
-    updateTopBar(1, "Connecting...")
+    updateTopBar(topBarStates.connecting, "Connecting...")
     console.log("logging in...");
 
     const options = {};
     if(password) options.password = password;
 
-    client.login(address, username, "", options)
+    client.login(address, username, "A Hat in Time", options)
         .then((val) => {
             slotData = val;
             console.log(slotData);
             displayConnected();
-            updateTopBar(2, `Connected to ${address} as ${username}`);
+            updateTopBar(topBarStates.connected, `Connected to ${address} as ${username}`);
             generateCourseSelect();
-            generateScorecard("Tourist Trap");
-            changeContentWindow(0);
+            changeContentWindow(contentWindows.courseSelect);
         })
         .catch((e) => {
             console.error(e);
-            updateConnectionControls(0);
+            setTopMenuState(menuStates.fixed);
             if(e.message.includes("InvalidSlot"))
-                updateTopBar(3, `Failed to connect: Invalid slot name`);
+                updateTopBar(topBarStates.error, `Failed to connect: Invalid slot name`);
             else if(e.message.includes("InvalidPassword"))
-                updateTopBar(3, `Failed to connect: Incorrect password`);
+                updateTopBar(topBarStates.error, `Failed to connect: Incorrect password`);
+            else if(e.message.includes("InvalidGame"))
+                updateTopBar(topBarStates.error, `Failed to connect: Incorrect game for slot`);
             else
-                updateTopBar(3, `Failed to connect to server`);
+                updateTopBar(topBarStates.error, `Failed to connect to server`);
         });
-}
-
-function updateConnectionControls(connected) {
-    let elem = document.getElementById("connect-controls");
-    if(connected) elem.classList.remove("active");
-    else elem.classList.add("active");
 }

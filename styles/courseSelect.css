@@ -27,9 +27,11 @@
     pointer-events: none;
 }
 
-.lock-icon {
+.course-tile.locked::after {
+    content: url("/assets/lock.svg");
+    scale: 500%;
     position: absolute;
-    left: calc(50% - 40px);
-    top: calc(50% - 40px);
+    left: calc(50% - 7px);
+    top: calc(50% - 7px);
     opacity: 20%;
 }
