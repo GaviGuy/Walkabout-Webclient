@@ -1,3 +1,26 @@
+
+#scorecard {
+    /* text-align: center; */
+}
+
+#scorecard-top {
+    text-align: center;
+    padding: 2rem;
+    width: 60rem;
+    
+    margin: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    border: 4px solid var(--color-main);
+    border-radius: 1rem;
+}
+
+#scorecard-top-title {
+    text-align: center;
+    font-size: 2rem;
+}
+
 #scorecard-tabs {
     display: flex;
     flex-direction: row;
@@ -24,7 +47,7 @@
     background-color: #FFF;
 }
 
-#scorecard {
+#scorecard-content {
     padding-top: 0px;
     margin-top: 0px;
 }
@@ -37,15 +60,6 @@
     display: contents;
 }
 
-#scorecard-top {
-    text-align: center;
-    padding: 2rem;
-}
-
-#scorecard-top-title {
-    text-align: center;
-    font-size: 2rem;
-}
 
 .scorecard-grid {
     display: grid;

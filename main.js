@@ -5,7 +5,7 @@ let slotData;
 
 function initialize() {
     console.log("gmorning");
-    document.getElementById("controls-connect").addEventListener("click", () => {handleLoginButton()});
+    document.getElementById("controls-connect").addEventListener("click", () => handleLoginButton());
     document.getElementById("chat-input").addEventListener("keyup", (e) => {
         if(e.key === "Enter" || e.keyCode === 13) {
             let elem = document.getElementById("chat-input");
@@ -19,8 +19,9 @@ function initialize() {
     document.getElementById("input-username").addEventListener("keyup", (e) => {
         updateConnectButton();
     });
-    document.getElementById("top-disconnect").addEventListener("click", () => {disconnect()});
-    document.getElementById("controls-disconnect").addEventListener("click", () => {disconnect()});
+    document.getElementById("top-disconnect").addEventListener("click", () => disconnect());
+    document.getElementById("controls-disconnect").addEventListener("click", () => disconnect());
+    document.getElementById("select-course").addEventListener("click", () => changeContentWindow(0));
 
     parseCourseInfo();
     initScorecardTabs();
@@ -47,8 +48,7 @@ function handleLoginButton() {
 
     if(!address || !username) return;
 
-    if(!password) login(address, username);
-    else login(address, username, password);
+    login(address, username, password);
 }
 
 function updateTopBar(style, message) {
@@ -68,6 +68,7 @@ function disconnect() {
     document.getElementById("controls-disconnect").setAttribute("disabled",1);
     updateTopBar(0, "Disconnected");
     updateConnectionControls(0);
+    changeContentWindow(-1);
     //update other relevant places: chat input
 }
 
@@ -87,9 +88,11 @@ function login(address, username, password) {
             updateTopBar(2, `Connected to ${address} as ${username}`);
             generateCourseSelect();
             generateScorecard("Tourist Trap");
+            changeContentWindow(0);
         })
         .catch((e) => {
             console.error(e);
+            updateConnectionControls(0);
             if(e.message.includes("InvalidSlot"))
                 updateTopBar(3, `Failed to connect: Invalid slot name`);
             else if(e.message.includes("InvalidPassword"))

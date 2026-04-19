@@ -49,7 +49,7 @@ function generateScoreInputs(gridElem, parlist) {
 
 function generateLostBalls(gridElem, parlist) {
     let labelElem = document.createElement("div");
-    labelElem.textContent = "Lost\nBalls";
+    labelElem.textContent = "Lost\nBall";
     gridElem.appendChild(labelElem);
     for(let i = 0; i < 18; i++) {
         if(!parlist[i] && parlist[i] != 0) break;

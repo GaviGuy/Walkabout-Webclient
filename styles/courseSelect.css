@@ -5,10 +5,31 @@
 }
 
 .course-tile {
+    position: relative;
+    display: inline-block;
     margin: 1rem;
     padding: 1rem;
     border: 2px solid var(--color-main);
     border-radius: 1rem;
-    width: 12rem;
+    font-size: 1.5rem;
+    width: 18rem;
+    height: 8rem;
     background-color: color-mix(in srgb, var(--color-1) 50%, var(--color-bg));
+}
+
+.course-tile:not(.locked) {
+    cursor: pointer;
+}
+
+.course-tile.locked {
+    color: color-mix(in srgb, var(--color-main) 50%, var(--color-bg));
+    background-color: color-mix(in srgb, var(--color-1) 20%, var(--color-bg));
+    pointer-events: none;
+}
+
+.lock-icon {
+    position: absolute;
+    left: calc(50% - 40px);
+    top: calc(50% - 40px);
+    opacity: 20%;
 }
